@@ -7,18 +7,18 @@ require 'rest-client'
 require 'byebug' if Sinatra::Base.development?
 # require 'yaml'
 
-require 'data_mapper'
+# require 'data_mapper'
 
 class V0 < Sinatra::Base
 
   ## DataMapper
   ##----------------------------------------------------------------------------
 
-  if Sinatra::Base.development?
-    DataMapper.setup(:default, "sqlite://#{root}/sqlite_dev.db")
-  else
-    DataMapper.setup(:default, "sqlite://#{root}/sqlite_dev.db")
-  end
+  # if Sinatra::Base.development?
+  #   DataMapper.setup(:default, "sqlite://#{root}/sqlite_dev.db")
+  # else
+  #   DataMapper.setup(:default, "sqlite://#{root}/sqlite_dev.db")
+  # end
 
   ## For debugging
   ##----------------------------------------------------------------------------
@@ -172,13 +172,13 @@ class V0 < Sinatra::Base
 
   enable :sessions
 
-  # before do
-  #   begin
-  #     no_auth? || authenticate_user
-  #   rescue NonFatalError
-  #     redirect '/sign_in'
-  #   end
-  # end
+  before do
+    begin
+      no_auth? || authenticate_user
+    rescue NonFatalError
+      redirect '/sign_in'
+    end
+  end
 
   def no_auth?
     request.path_info == '/' ||

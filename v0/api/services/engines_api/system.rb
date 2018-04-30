@@ -20,8 +20,7 @@ class V0
           end
 
           def dn_lookup( params )
-            byebug
-            @system_api.get 'system/uadmin/dn_lookup',
+            @system_api.post 'system/uadmin/dn_lookup',
             user_auth: {
               uid: params[:uid],
               password: params[:password]
