@@ -95,7 +95,7 @@ class V0 < Sinatra::Base
   ## Data mapper
   ##----------------------------------------------------------------------------
 
-  DataMapper.finalize
+  # DataMapper.finalize
 
 
 
