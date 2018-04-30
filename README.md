@@ -21,5 +21,6 @@ Environment
 -----------
 **Required**  
 ENV['ENGINES_USER_PORTAL_SYSTEM_IP']
+
 **Optional**  
 ENV['ENGINES_USER_PORTAL_USER_INACTIVITY_TIMEOUT'] default is 30 (i.e. 30 minutes).  
