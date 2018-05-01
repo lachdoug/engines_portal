@@ -10,7 +10,7 @@ class V0
           end
 
           def sign_in( params )
-            byebug
+            # byebug
             @system_api.post 'system/login',
             {
               user_name: params[:user_name],

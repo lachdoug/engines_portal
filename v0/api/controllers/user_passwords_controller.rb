@@ -7,7 +7,7 @@ class V0
       end
 
       post '/user/password' do
-        byebug
+        # byebug
         user = User.new( session, request, settings )
         if user.sign_in(
             system( without_token: true ),

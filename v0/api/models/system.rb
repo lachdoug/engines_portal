@@ -20,7 +20,7 @@ class V0
         end
 
         def sign_in(params)
-          byebug
+          # byebug
           engines_api_system.sign_in( {
             user_name: params[:user_name],
             password: params[:password],
