@@ -20,7 +20,6 @@ class V0
         end
 
         def sign_in(params)
-          # byebug
           engines_api_system.sign_in( {
             user_name: params[:user_name],
             password: params[:password],
@@ -29,7 +28,7 @@ class V0
         rescue NonFatalError => e
           # cusotmize error messages for signin
           if e.status_code == 401
-            raise NonFatalError.new "Invalid password.", 401
+            raise NonFatalError.new "Invalid username or password.", 401
           elsif e.status_code == 502
             raise NonFatalError.new "Failed to connect to system.\n\nPlease check that the system is running and accessable on the network at the URL provided.", 502
           else
@@ -39,6 +38,12 @@ class V0
 
         def dn_lookup(params)
           engines_api_system.dn_lookup params
+        rescue NonFatalError => e
+          if e.status_code == 401
+            raise NonFatalError.new "Invalid username or password.", 401
+          else
+            raise
+          end
         end
 
       end

@@ -10,7 +10,6 @@ class V0
           end
 
           def sign_in( params )
-            # byebug
             @system_api.post 'system/login',
             {
               user_name: params[:user_name],
@@ -148,7 +147,7 @@ class V0
           ##########################################################################
 
           def update_users_account_password( user_uid, password )
-            call :put, 'system/uadmin/users/accounts/password', user_uid: user_uid, password: password
+            call :put, 'system/uadmin/users/accounts/password', user_uid: user_uid, password: { new: password }
           end
 
 

@@ -7,15 +7,18 @@ class V0
       end
 
       post '/user/password' do
-        # byebug
-        user = User.new( session, request, settings )
-        if user.sign_in(
-            system( without_token: true ),
-            { user_name: session[:dn], password: session[:password] } )
-          system.engines_api_system.update_users_account_password( session[:user_name], password )
-          redirect "/"
+        if params[:new_password] == params[:new_password_confirmation]
+          user = User.new( session, request, settings )
+          if user.sign_in(
+              system( without_token: true ),
+              { uid: session[:uid], password: params[:current_password] } )
+            system.engines_api_system.update_users_account_password( session[:uid], params[:new_password] )
+            redirect "/"
+          else
+            halt 401
+          end
         else
-          halt 401
+          erb :user_password_edit, message: "New password does not confirmation."
         end
       end
 

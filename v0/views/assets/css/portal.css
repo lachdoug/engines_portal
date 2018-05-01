@@ -142,4 +142,5 @@ form.sign_in_form {
 .message {
   margin-top: 12px;
   color: red;
+  text-align: center;
 }

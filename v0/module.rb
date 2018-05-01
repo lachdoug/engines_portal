@@ -1,24 +1,10 @@
 require 'sinatra/base'
 require 'sinatra/extension'
 require 'sinatra/json'
-
-# require 'tempfile'
 require 'rest-client'
 require 'byebug' if Sinatra::Base.development?
-# require 'yaml'
-
-# require 'data_mapper'
 
 class V0 < Sinatra::Base
-
-  ## DataMapper
-  ##----------------------------------------------------------------------------
-
-  # if Sinatra::Base.development?
-  #   DataMapper.setup(:default, "sqlite://#{root}/sqlite_dev.db")
-  # else
-  #   DataMapper.setup(:default, "sqlite://#{root}/sqlite_dev.db")
-  # end
 
   ## For debugging
   ##----------------------------------------------------------------------------
@@ -65,7 +51,6 @@ class V0 < Sinatra::Base
     end.join("\n")
   end
 
-
   ##############################################################################
   ## Errors
   ##############################################################################
@@ -78,10 +63,6 @@ class V0 < Sinatra::Base
     attr_reader :status_code, :message
   end
 
-  # class AuthError < NonFatalError
-  # end
-
-
   ##############################################################################
   ## API
   ##############################################################################
@@ -91,13 +72,6 @@ class V0 < Sinatra::Base
 
   require_relative 'api/api'
   register Api::Controllers
-
-  ## Data mapper
-  ##----------------------------------------------------------------------------
-
-  # DataMapper.finalize
-
-
 
   ## Helpers
   ##----------------------------------------------------------------------------
@@ -141,7 +115,7 @@ class V0 < Sinatra::Base
       } } }.to_json ]
     end
   end
-  #
+
   not_found do
     404
   end
@@ -155,17 +129,11 @@ class V0 < Sinatra::Base
   end
 
   ## Navbar
+  ##----------------------------------------------------------------------------
 
   def navbar
     erb :navbar
   end
-
-  # ## Default content type to HTML
-  # ##----------------------------------------------------------------------------
-  #
-  # before do
-  #   content_type :html
-  # end
 
   ## Authenticate
   ##----------------------------------------------------------------------------
@@ -209,7 +177,6 @@ class V0 < Sinatra::Base
   ##----------------------------------------------------------------------------
 
   def system(opts={})
-    @system ||=
       Api::Models::System.new(
         system_api_url,
         opts[:without_token] ? nil : system_api_token,

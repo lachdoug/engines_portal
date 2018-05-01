@@ -11,8 +11,8 @@ class V0
           user = User.new( session, request, settings )
           user.sign_in( system( without_token: true ), params[:sign_in] )
           redirect '/user/portal'
-        rescue => e
-          raise unless e.is_a?(NonFatalError) && e.status_code == 401
+        rescue NonFatalError => e
+          raise unless e.status_code == 405
           erb :sign_in, message: "Invalid username or password."
         end
       end
