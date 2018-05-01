@@ -10,9 +10,10 @@ class V0
           end
 
           def sign_in( params )
+            byebug
             @system_api.post 'system/login',
             {
-              user_name: params[:dn],
+              user_name: params[:user_name],
               password: params[:password],
               ip_address: params[:ip_address]
             },

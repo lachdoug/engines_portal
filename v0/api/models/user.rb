@@ -12,7 +12,7 @@ class V0
         def sign_in( system, params )
           dn = system.dn_lookup uid: params[:uid], password: params[:password]
           system_api_token = system.sign_in( {
-            dn: dn,
+            user_name: dn[:dn],
             password: params[:password],
             ip_address: @request.ip } )
           @session[:system_api_token] = system_api_token

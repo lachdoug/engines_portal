@@ -20,7 +20,12 @@ class V0
         end
 
         def sign_in(params)
-          engines_api_system.sign_in user_name: params[:user_name], password: params[:password]
+          byebug
+          engines_api_system.sign_in( {
+            user_name: params[:user_name],
+            password: params[:password],
+            ip_address: params[:ip_address]
+          } )
         rescue NonFatalError => e
           # cusotmize error messages for signin
           if e.status_code == 401
