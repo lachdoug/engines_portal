@@ -1,2 +1,2 @@
-require_relative 'v0/module'
+require_relative 'app/v0/module'
 map('/') { run V0 }

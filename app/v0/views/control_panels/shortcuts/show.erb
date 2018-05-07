@@ -1,0 +1,13 @@
+<a href="/control_panel/shortcuts" class="btn pull-left">Done</a>
+<a href="/control_panel/shortcuts/<%= @shortcut.id %>/delete" class="btn btn-warning pull-right">Delete shortcut</a>
+<br>
+<div class="center-align">
+  <h4>Shortcut</h4>
+  <%= @shortcut.label %><br>
+  <%= @shortcut.url %><br>
+  <a href="/control_panel/shortcuts/<%= @shortcut.id %>/edit" class="btn">Edit</a><br>
+  <br><br>
+  <image height="96" width="96" src="<%= @shortcut.icon_url + '?' + 'nocache=' + @shortcut.icon_updated_at? %>"><br>
+  <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon" class="btn">Edit</a><br><br>
+
+</div>

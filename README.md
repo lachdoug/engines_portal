@@ -10,7 +10,14 @@ Sinatra (module style, with config.ru)
 Needs
 -----
 public directory: public   
-Note: does not need a DB or volumes and does not send mail.
+persistent volume: data
+
+/Uses activerecord and rake/
+In production $DATABASE_URL environment variable will be read as the database
+
+/Image processing/
+System: Magick
+(for dev in ubuntu: sudo apt-get install libmagickwand-dev )
 
 config.ru
 ---------
