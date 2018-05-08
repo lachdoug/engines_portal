@@ -36,7 +36,7 @@ class V0
         end
 
         def authenticated?(opts={})
-          force_sign_out "Not signed in." unless system_api_token
+          force_sign_out "Not signed in." unless user_name && system_api_token
           check_timeout( opts )
           return true
         end

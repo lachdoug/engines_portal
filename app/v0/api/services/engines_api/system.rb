@@ -27,7 +27,7 @@ class V0
             }
           end
 
-          def call( method, route, params={} )
+          def uadmin_call( method, route, params={} )
             @system_api.send( method, route, params.merge(
             { user_auth:
               { user_name: @session[:user_name],
@@ -39,23 +39,23 @@ class V0
           ##########################################################################
 
           def index_users_accounts
-            call :get, 'system/uadmin/users/accounts'
+            uadmin_call :get, 'system/uadmin/users/accounts'
           end
 
           def show_users_account( uid )
-            call :get, 'system/uadmin/users/accounts/', uid: uid
+            uadmin_call :get, 'system/uadmin/users/accounts/', uid: uid
           end
 
           def create_users_account( account )
-            call :post, 'system/uadmin/users/accounts/', account: account
+            uadmin_call :post, 'system/uadmin/users/accounts/', account: account
           end
 
           def update_users_account( uid, account )
-            call :put, 'system/uadmin/users/accounts/', uid: uid, account: account
+            uadmin_call :put, 'system/uadmin/users/accounts/', uid: uid, account: account
           end
 
           def delete_users_account( uid )
-            call :delete, 'system/uadmin/users/accounts/', uid: uid
+            uadmin_call :delete, 'system/uadmin/users/accounts/', uid: uid
           end
 
           ##########################################################################
@@ -63,11 +63,11 @@ class V0
           ##########################################################################
 
           def index_users_groups
-            call :get, 'system/uadmin/users/groups'
+            uadmin_call :get, 'system/uadmin/users/groups'
           end
 
           def show_users_group( name )
-            call :get, 'system/uadmin/users/groups/', name: name
+            uadmin_call :get, 'system/uadmin/users/groups/', name: name
           end
 
           ##########################################################################
@@ -75,15 +75,15 @@ class V0
           ##########################################################################
 
           def delete_users_account_groups( user_uid, names )
-            call :delete, 'system/uadmin/users/accounts/groups', user_uid: user_uid, names: names
+            uadmin_call :delete, 'system/uadmin/users/accounts/groups', user_uid: user_uid, names: names
           end
 
           def new_users_account_groups( user_uid )
-            call :get, 'system/uadmin/users/accounts/groups/new', user_uid: user_uid
+            uadmin_call :get, 'system/uadmin/users/accounts/groups/new', user_uid: user_uid
           end
 
           def create_users_account_groups( user_uid, groups )
-            call :post, 'system/uadmin/users/accounts/groups', user_uid: user_uid, groups: groups
+            uadmin_call :post, 'system/uadmin/users/accounts/groups', user_uid: user_uid, groups: groups
           end
 
           ##########################################################################
@@ -91,19 +91,19 @@ class V0
           ##########################################################################
 
           def create_users_account_email( user_uid, email )
-            call :post, 'system/uadmin/users/accounts/email', user_uid: user_uid, email: email
+            uadmin_call :post, 'system/uadmin/users/accounts/email', user_uid: user_uid, email: email
           end
 
           def edit_users_account_email( user_uid )
-            call :get, 'system/uadmin/users/accounts/email/edit', user_uid: user_uid
+            uadmin_call :get, 'system/uadmin/users/accounts/email/edit', user_uid: user_uid
           end
 
           def update_users_account_email( user_uid, email )
-            call :put, 'system/uadmin/users/accounts/email', user_uid: user_uid, email: email
+            uadmin_call :put, 'system/uadmin/users/accounts/email', user_uid: user_uid, email: email
           end
 
           def delete_users_account_email( user_uid )
-            call :delete, 'system/uadmin/users/accounts/email', user_uid: user_uid
+            uadmin_call :delete, 'system/uadmin/users/accounts/email', user_uid: user_uid
           end
 
           ########################################################################
@@ -111,11 +111,11 @@ class V0
           ########################################################################
 
           def new_users_account_email_distribution_group( user_uid )
-            call :get, 'system/uadmin/users/accounts/email/distribution_groups/new', user_uid: user_uid
+            uadmin_call :get, 'system/uadmin/users/accounts/email/distribution_groups/new', user_uid: user_uid
           end
 
           def create_users_account_email_distribution_group( user_uid, distribution_group )
-            call :post, 'system/uadmin/users/accounts/email/distribution_groups/', user_uid: user_uid, distribution_group: distribution_group
+            uadmin_call :post, 'system/uadmin/users/accounts/email/distribution_groups/', user_uid: user_uid, distribution_group: distribution_group
           end
 
           ########################################################################
@@ -123,11 +123,11 @@ class V0
           ########################################################################
 
           def create_users_email_alias( user_uid, _alias )
-            call :post, 'system/uadmin/users/accounts/email/aliases/', user_uid: user_uid, alias: _alias
+            uadmin_call :post, 'system/uadmin/users/accounts/email/aliases/', user_uid: user_uid, alias: _alias
           end
 
           def delete_users_email_alias( user_uid, address )
-            call :delete, 'system/uadmin/users/accounts/email/aliases/', user_uid: user_uid, address: address
+            uadmin_call :delete, 'system/uadmin/users/accounts/email/aliases/', user_uid: user_uid, address: address
           end
 
           ########################################################################
@@ -135,11 +135,11 @@ class V0
           ########################################################################
 
           def create_users_email_distribution_group( user_uid, distribution_group )
-            call :post, 'system/uadmin/users/accounts/email/distribution_groups/', user_uid: user_uid, distribution_group: distribution_group
+            uadmin_call :post, 'system/uadmin/users/accounts/email/distribution_groups/', user_uid: user_uid, distribution_group: distribution_group
           end
 
           def delete_users_email_distribution_group( user_uid, address )
-            call :delete, 'system/uadmin/users/accounts/email/distribution_groups/', user_uid: user_uid, address: address
+            uadmin_call :delete, 'system/uadmin/users/accounts/email/distribution_groups/', user_uid: user_uid, address: address
           end
 
           ##########################################################################
@@ -147,7 +147,7 @@ class V0
           ##########################################################################
 
           def update_users_account_password( user_uid, password )
-            call :put, 'system/uadmin/users/accounts/password', user_uid: user_uid, password: { new: password }
+            uadmin_call :put, 'system/uadmin/users/accounts/password', user_uid: user_uid, password: { new: password }
           end
 
           ##########################################################################
@@ -155,11 +155,19 @@ class V0
           ##########################################################################
 
           def app_statuses
-            call :get, 'containers/engines/status'
+            @system_api.get 'containers/engines/status'
           end
 
           def icon_url_for(app_name)
-            call :get, "containers/engine/#{app_name}/icon_url"
+            @system_api.get "containers/engine/#{app_name}/icon_url"
+          end
+
+          def blueprint_for(app_name)
+            @system_api.get "containers/engine/#{app_name}/blueprint"
+          end
+
+          def websites_for(app_name)
+            @system_api.get "containers/engine/#{app_name}/websites"
           end
 
 

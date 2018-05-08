@@ -1,19 +1,21 @@
-<div class="center-align">
-  <h4><%= @shortcut.new_record? ? 'New' : 'Edit' %> shortcut</h4>
-  <form
-    method="POST"
-    action='<%= @shortcut.new_record? ?
-      "/control_panel/shortcuts" :
-      "/control_panel/shortcuts/#{@shortcut.id}" %>'
-    class="form">
-    <div class="left-align">
-      <input value="<%= @shortcut.shortcut_type %>" name="shortcut[shortcut_type]" type="hidden"></input>
-      <label>Label</label><br>
-      <input value="<%= @shortcut.label %>" name="shortcut[label]" required></input><br><br>
-      <label>URL</label><br>
-      <input value="<%= @shortcut.url %>" name="shortcut[url]" type="url" required></input><br><br>
-    </div>
-    <a href='<%= @shortcut.new_record? ? "/control_panel/shortcuts" : "/control_panel/shortcuts/#{@shortcut.id}" %>' class="btn pull-left">Cancel</a>
-    <button type="submit" class="btn btn-ok pull-right"><%= @shortcut.new_record? ? "Create" : "Update" %></button>
-  </form>
+<div class="control-panel">
+  <div class="center-align">
+    <h4><%= @shortcut.new_record? ? 'New' : 'Edit' %> shortcut</h4>
+    <form
+      method="POST"
+      action='<%= @shortcut.new_record? ?
+        "/control_panel/shortcuts" :
+        "/control_panel/shortcuts/#{@shortcut.id}" %>'
+      class="form">
+      <div class="left-align">
+        <input value="<%= @shortcut.shortcut_type %>" name="shortcut[shortcut_type]" type="hidden"></input>
+        <label>Label</label><br>
+        <input value="<%= @shortcut.label %>" name="shortcut[label]" required></input><br><br>
+        <label>URL</label><br>
+        <input value="<%= @shortcut.url %>" name="shortcut[url]" type="url" required></input><br><br>
+      </div>
+      <a href='<%= @shortcut.new_record? ? "/control_panel/shortcuts" : "/control_panel/shortcuts/#{@shortcut.id}" %>' class="btn pull-left">Cancel</a>
+      <button type="submit" class="btn btn-ok pull-right"><%= @shortcut.new_record? ? "Create" : "Update" %></button>
+    </form>
+  </div>
 </div>

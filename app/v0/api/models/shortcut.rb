@@ -33,6 +33,11 @@ class V0
           File.delete "data/v0/icons/#{id}"
         end
 
+        def delete
+          delete_icon if icon_present?
+          super
+        end
+
       end
     end
   end

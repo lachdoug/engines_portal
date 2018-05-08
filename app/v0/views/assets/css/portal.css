@@ -84,6 +84,20 @@ div.shortcut p {
   background-color: #eee;
 }
 
+.control-panel {
+  box-shadow: 0 5px 15px rgba(0,0,0,.5);
+  max-width: 800px;
+  margin: auto;
+  padding: 10px 10px 30px 10px;
+
+}
+
+.control-panel:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 
 input {
   box-sizing:border-box;

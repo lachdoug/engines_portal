@@ -64,6 +64,7 @@ class V0
         end
 
         def get(route, data={}, opts={})
+          puts "TOKEN: #{@token}"
           handle_response do
             RestClient::Request.execute(
               method: :get,

@@ -201,11 +201,5 @@ class V0 < Sinatra::Base
         session )
   end
 
-  ## Make sure icon dir exists
-  ##----------------------------------------------------------------------------
-
-  # require 'fileutils'
-
-  FileUtils.mkdir_p 'data/v0/icons'
 
 end
