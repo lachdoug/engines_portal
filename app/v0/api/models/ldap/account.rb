@@ -17,6 +17,7 @@ class V0
 
           def ldap_account_details
             @ldap_account_details ||= @system.ldap_users
+          end
 
         end
       end
