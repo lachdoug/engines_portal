@@ -26,7 +26,7 @@ class V0
         if @icon_uploader.update( params[:icon] )
           redirect "/control_panel/shortcuts/#{ params[:id] }/icon"
         else
-          erb :'control_panels/shortcuts/icons/form', alert: "Failed to upload icon."
+          redirect "/control_panel/shortcuts/#{ params[:id] }/icon", alert: "Failed to upload icon."
         end
       end
 

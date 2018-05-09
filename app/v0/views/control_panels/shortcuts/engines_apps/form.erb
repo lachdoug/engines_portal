@@ -1,0 +1,26 @@
+<div class="control-panel">
+  <div class="heading">Edit Engines app shortcut</div>
+  <div class="center-align">
+    <form
+      method="POST"
+      action='<%= @shortcut.new_record? ?
+        "/control_panel/shortcuts/engines_app" :
+        "/control_panel/shortcuts/#{@shortcut.id}/engines_app" %>'
+      class="form">
+      <div class="left-align">
+        <input value="<%= @shortcut.shortcut_type %>" name="shortcut[shortcut_type]" type="hidden"></input>
+        <input value="<%= @shortcut.engine_name %>" name="shortcut[engine_name]" type="hidden"></input>
+        <label>Label</label><br>
+        <input value="<%= @shortcut.label %>" name="shortcut[label]" required></input><br><br>
+        <label>URL</label><br>
+        <select value="<%= @shortcut.url %>" name="shortcut[url]" type="url" required>
+          <% @shortcut.websites.each do |website| %>
+            <option value="<%= website %>"><%= website %></option>
+          <% end %>
+        </select><br><br>
+      </div>
+      <a href='<%= @shortcut.new_record? ? "/control_panel/shortcuts/engines_app/new/select_app" : "/control_panel/shortcuts/#{@shortcut.id}" %>' class="btn pull-left">Cancel</a>
+      <button type="submit" class="btn pull-right"><%= @shortcut.new_record? ? "Create" : "Update" %></button>
+    </form>
+  </div>
+</div>

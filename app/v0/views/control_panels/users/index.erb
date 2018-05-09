@@ -1,0 +1,18 @@
+<div class="control-panel">
+  <a href="/control_panel" class="btn pull-right">Done</a>
+  <div class="heading">Users</div>
+  <a href='/control_panel/users/new' class="btn">New</a><br><br>
+  <div class="center-align">
+    <% @users.each do |user| %>
+      <div class="user">
+        <a href="/control_panel/users/<%= user.id %>">
+          <div class="img-wrapper">
+            <img src="<%= user.icon_url + '?' + 'nocache=' + user.icon_updated_at? %>"></img>
+          </div>
+          <p><%= user.label %></p>
+        </a>
+      </div>
+    <% end %>
+
+  </div>
+</div>

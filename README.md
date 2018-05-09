@@ -28,6 +28,7 @@ Environment
 -----------
 **Required**  
 ENV['ENGINES_USER_PORTAL_SYSTEM_IP']
+ENV['ENGINES_USER_PORTAL_SESSION_SECRET']
 
 **Optional**  
-ENV['ENGINES_USER_PORTAL_USER_INACTIVITY_TIMEOUT'] default is 30 (i.e. 30 minutes).  
+ENV['ENGINES_USER_PORTAL_USER_INACTIVITY_TIMEOUT'] default is 30 (i.e. 30 minutes).

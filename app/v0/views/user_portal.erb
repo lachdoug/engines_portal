@@ -2,7 +2,9 @@
   <% @shortcuts.each do |shortcut| %>
     <div class="shortcut">
       <a href="<%= shortcut.url %>" target="<%= shortcut.url %>">
-        <img src="<%= shortcut.icon_url + '?' + 'nocache=' + shortcut.icon_updated_at? %>"></img>
+        <div class="img-wrapper">
+          <img src="<%= shortcut.icon_url + '?' + 'nocache=' + shortcut.icon_updated_at? %>"></img>
+        </div>
         <p><%= shortcut.label %></p>
       </a>
     </div>

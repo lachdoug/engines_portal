@@ -5,6 +5,8 @@ class V0
 
         default_scope { order('lower(label)') }
 
+        attr_reader :websites, :default_icon_url
+
         def self.for( current_user )
           self.all
         end
@@ -36,6 +38,25 @@ class V0
         def delete
           delete_icon if icon_present?
           super
+        end
+
+        def load_app_label_from( system )
+          self.label = system.label_for engine_name
+        end
+
+        def load_app_websites_from( system )
+          @websites = system.websites_for engine_name
+        end
+
+        def load_default_icon_url_from( system )
+          @default_icon_url = system.icon_url_for engine_name
+        end
+
+        def load_defaults_from( system )
+          load_app_label_from system
+          load_app_websites_from system
+          self.url = @websites[0]
+          load_default_icon_url_from system
         end
 
       end

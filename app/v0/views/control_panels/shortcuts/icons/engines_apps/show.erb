@@ -1,0 +1,21 @@
+<div class="control-panel">
+  <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon" class="btn pull-right">Done</a>
+  <div class="heading">Default icon</div>
+  <div class="center-align">
+    <%= @shortcut.label %><br>
+
+    <% if @shortcut.default_icon_url %>
+      <image height="96" src="<%= @shortcut.default_icon_url %>"><br>
+      <form
+        method="POST"
+        action="/control_panel/shortcuts/<%= @shortcut.id %>/icon/engines_app/update">
+        <input value="<%= @shortcut.default_icon_url %>" name="icon_url" type="hidden"></input>
+        <button type="submit" class="btn">Use default</button>
+      </form>
+    <% else %>
+      No default icon.
+    <% end %>
+
+
+  </div>
+</div>

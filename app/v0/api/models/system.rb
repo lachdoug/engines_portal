@@ -48,7 +48,32 @@ class V0
 
         def apps
           engines_api_system.app_statuses.map { |app| app.name }
+        # rescue
+        #   [ "Hi", "Ho" ]
         end
+
+        def label_for(app_name)
+          blueprint = engines_api_system.blueprint_for app_name
+          label = blueprint[:metadata] &&
+          blueprint[:metadata][:display] &&
+          blueprint[:metadata][:display][:label]
+          label || app_name
+        # rescue
+        #   app_name
+        end
+
+        def websites_for(app_name)
+          engines_api_system.websites_for app_name
+        # rescue
+        #   [ "http://www.smh.com.au", "http://google.com" ]
+        end
+
+        def icon_url_for(app_name)
+          engines_api_system.icon_url_for app_name
+        # rescue
+        #   "https://www.freelogodesign.org/img/logo-ex-7.png"
+        end
+
 
       end
     end

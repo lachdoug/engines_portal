@@ -1,0 +1,21 @@
+<div class="control-panel">
+  <div class="heading">New Engines app shortcut</div>
+  <div class="center-align">
+    <form
+      method="POST"
+      action='/control_panel/shortcuts/engines_app'
+      class="form">
+      <div class="left-align">
+        <input value="<%= @shortcut.shortcut_type %>" name="shortcut[shortcut_type]" type="hidden"></input>
+        <label>Engines app</label><br>
+        <select value="<%= @shortcut.engine_name %>" name="shortcut[engine_name]" required>
+          <% system.apps.each do |app| %>
+            <option value="<%= app %>"><%= app %></option>
+          <% end %>
+        </select><br><br>
+      </div>
+      <a href="/control_panel/shortcuts/new" class="btn pull-left">Cancel</a>
+      <button type="submit" class="btn pull-right">Create</button>
+    </form>
+  </div>
+</div>
