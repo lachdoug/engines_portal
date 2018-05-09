@@ -1,0 +1,13 @@
+<div class="control-panel">
+  <div class="heading">Delete icon</div>
+  <div class="center-align">
+    <%= @shortcut.label %><br><br>
+    <image height="96" src="<%= @shortcut.icon_url + '?' + 'nocache=' + @shortcut.icon_updated_at? %>"><br>
+    <form method="post" action="/control_panel/shortcuts/<%= @shortcut.id %>/icon" class="form">
+      <input type="hidden" name="_method" value="DELETE">
+      <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon" class="btn pull-left">Cancel</a>
+      <button type="submit" class="btn pull-right">Delete</button>
+    </form>
+
+  </div>
+</div>

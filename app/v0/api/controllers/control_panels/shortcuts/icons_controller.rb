@@ -13,6 +13,12 @@ class V0
         erb :'control_panels/shortcuts/icons/form'
       end
 
+      get '/control_panel/shortcuts/:id/icon/delete' do
+        halt 401 unless current_user.is_admin?
+        @shortcut = Shortcut.find( params[:id] )
+        erb :'control_panels/shortcuts/icons/delete'
+      end
+
       delete '/control_panel/shortcuts/:id/icon' do
         halt 401 unless current_user.is_admin?
         Shortcut.find( params[:id] ).delete_icon
