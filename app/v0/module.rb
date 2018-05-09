@@ -33,7 +33,7 @@ class V0 < Sinatra::Base
   end
 
   set system_ip: ENV['ENGINES_USER_PORTAL_SYSTEM_IP']
-  set dump_errors: Sinatra::Base.development?
+  set dump_errors: true # Sinatra::Base.development?
   set public_folder: 'public'
   set session_secret: ENV['ENGINES_USER_PORTAL_SESSION_SECRET'] || ENV['SECRET_KEY_BASE']
   set user_inactivity_timeout: ( ENV['ENGINES_USER_PORTAL_USER_INACTIVITY_TIMEOUT'] || 30 ).to_f * 60
