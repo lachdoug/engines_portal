@@ -1,17 +1,17 @@
 <div class="control-panel">
-  <a href="/control_panel/shortcuts/<%= @shortcut.id %>" class="btn pull-right">Close</a>
+  <a href="/control_panel/shortcuts/<%= @shortcut.id %>" class="btn pull-right"><%= fa 'arrow-up' %></a>
   <div class="heading">Shortcut icon</div>
   <div class="center-align">
     <%= @shortcut.label %><br><br>
     <image height="96" src="<%= @shortcut.icon_url + '?' + 'nocache=' + @shortcut.icon_updated_at? %>"><br>
-    <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon/edit" class="btn">Upload</a>
+    <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon/edit" class="btn"><%= fa 'file-image-o', "Upload" %></a>
     <% if @shortcut.shortcut_type == "engines_app" %>
-      <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon/engines_app/edit" class="btn">Default</a>
+      <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon/engines_app/edit" class="btn"><%= fa 'image', "Default" %></a>
     <% end %>
   </div>
   <% if @shortcut.icon_present? %>
     <br>
-    <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon/delete" class="btn">Delete icon</a>
+    <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon/delete" class="btn"><%= fa 'trash-o', "Delete icon" %></a>
   <% end %>
 
 </div>

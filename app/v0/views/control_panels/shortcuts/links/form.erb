@@ -14,8 +14,8 @@
         <label>URL</label><br>
         <input value="<%= @shortcut.url %>" name="shortcut[url]" type="url" required></input><br><br>
       </div>
-      <a href='<%= @shortcut.new_record? ? "/control_panel/shortcuts/new" : "/control_panel/shortcuts/#{@shortcut.id}" %>' class="btn pull-left">Cancel</a>
-      <button type="submit" class="btn pull-right"><%= @shortcut.new_record? ? "Create" : "Update" %></button>
+      <a href='<%= @shortcut.new_record? ? "/control_panel/shortcuts/new" : "/control_panel/shortcuts/#{@shortcut.id}" %>' class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+      <button type="submit" class="btn pull-right"><%= fa 'check', ( @shortcut.new_record? ? "Create" : "Update" ) %></button>
     </form>
   </div>
 </div>

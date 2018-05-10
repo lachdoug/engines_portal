@@ -47,9 +47,7 @@ class V0
         end
 
         def apps
-          engines_api_system.app_statuses.map { |app| app.name }
-        # rescue
-        #   [ "Hi", "Ho" ]
+          engines_api_system.app_statuses.keys.sort
         end
 
         def label_for(app_name)
@@ -72,6 +70,10 @@ class V0
           engines_api_system.icon_url_for app_name
         # rescue
         #   "https://www.freelogodesign.org/img/logo-ex-7.png"
+        end
+
+        def accounts
+          engines_api_system.index_users_accounts.sort_by { |account| account[:uid] }
         end
 
 

@@ -203,4 +203,12 @@ class V0 < Sinatra::Base
   end
 
 
+  ## View helpers
+  helpers do
+        def fa( type, text=nil )
+          "<i class='fa fa-#{type}'></i>#{ text ? ' ' + text : nil }"
+        end
+  end
+
+
 end

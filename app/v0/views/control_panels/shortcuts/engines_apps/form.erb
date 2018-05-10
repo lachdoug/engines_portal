@@ -19,7 +19,7 @@
           <% end %>
         </select><br><br>
       </div>
-      <a href='<%= @shortcut.new_record? ? "/control_panel/shortcuts/engines_app/new/select_app" : "/control_panel/shortcuts/#{@shortcut.id}" %>' class="btn pull-left">Cancel</a>
+      <a href='<%= @shortcut.new_record? ? "/control_panel/shortcuts/engines_app/new/select_app" : "/control_panel/shortcuts/#{@shortcut.id}" %>' class="btn pull-left"><%= fa 'times', "Cancel" %></a>
       <button type="submit" class="btn pull-right"><%= @shortcut.new_record? ? "Create" : "Update" %></button>
     </form>
   </div>

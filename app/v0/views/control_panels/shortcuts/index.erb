@@ -1,7 +1,7 @@
 <div class="control-panel">
-  <a href="/control_panel" class="btn pull-right">Close</a>
+  <a href="/control_panel" class="btn pull-right"><%= fa 'arrow-up' %></a>
   <div class="heading">Shortcuts</div>
-  <a href='/control_panel/shortcuts/new' class="btn">New</a><br><br>
+  <a href='/control_panel/shortcuts/new' class="btn"><%= fa 'plus', "New" %></a><br><br>
   <div class="center-align">
     <% @shortcuts.each do |shortcut| %>
       <div class="shortcut">

@@ -4,8 +4,8 @@
     <%= @shortcut.label %><br><br>
     <form class="form" method="post" action="/control_panel/shortcuts/<%= @shortcut.id %>">
       <input type="hidden" name="_method" value="DELETE">
-      <a href="/control_panel/shortcuts/<%= @shortcut.id %>" class="btn pull-left">Cancel</a>
-      <button type="submit" class="btn pull-right">Delete</button>
+      <a href="/control_panel/shortcuts/<%= @shortcut.id %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+      <button type="submit" class="btn pull-right"><%= fa 'check', "Delete" %></button>
     </form>
 
   </div>

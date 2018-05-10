@@ -110,9 +110,9 @@ div.shortcut p {
   height: 40px;
   line-height: 1.42857143;
   vertical-align: middle;
-  font-weight: 600;
+  /*font-weight: 600;*/
   padding: 6px 12px;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 

@@ -1,5 +1,5 @@
 <div class="control-panel">
-  <a href="/control_panel/shortcuts" class="btn pull-right">Close</a>
+  <a href="/control_panel/shortcuts" class="btn pull-right"><%= fa 'arrow-up' %></a>
   <% if @shortcut.shortcut_type == "link" %>
     <div class="heading">Link to URL shortcut</div>
   <% else %>
@@ -10,15 +10,15 @@
     <%= @shortcut.label %><br>
     <%= @shortcut.url %><br>
     <% if @shortcut.shortcut_type == "link" %>
-      <a href="/control_panel/shortcuts/<%= @shortcut.id %>/link/edit" class="btn">Edit</a><br>
+      <a href="/control_panel/shortcuts/<%= @shortcut.id %>/link/edit" class="btn"><%= fa 'edit', "Edit" %></a><br>
     <% else %>
-      <a href="/control_panel/shortcuts/<%= @shortcut.id %>/engines_app/edit" class="btn">Edit</a><br>
+      <a href="/control_panel/shortcuts/<%= @shortcut.id %>/engines_app/edit" class="btn"><%= fa 'edit', "Edit" %></a><br>
     <% end %>
     <br><br>
     <image height="96" src="<%= @shortcut.icon_url + '?' + 'nocache=' + @shortcut.icon_updated_at? %>"><br>
-    <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon" class="btn">Edit</a><br><br>
+    <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon" class="btn"><%= fa 'edit', "Edit icon" %></a><br><br>
   </div>
   <br>
-  <a href="/control_panel/shortcuts/<%= @shortcut.id %>/delete" class="btn">Delete shortcut</a>
+  <a href="/control_panel/shortcuts/<%= @shortcut.id %>/delete" class="btn"><%= fa 'trash-o', "Delete shortcut" %></a>
 
 </div>

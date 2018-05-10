@@ -1,0 +1,23 @@
+<div class="control-panel">
+  <div class="heading">New account</div>
+  <div class="center-align">
+    <form
+      method="POST"
+      action="/control_panel/accounts"
+      class="form">
+      <div class="left-align">
+        <label>Name</label><br>
+        <div style="display: inline-block; width: 200px;"><input name="account[first_name]" placeholder="First" required></input></div><div style="display: inline-block; width: 100px;"><input name="account[middle_name]" placeholder="Middle"></input></div><br>
+        <div style="display: inline-block; width: 300px;"><input name="account[last_name]" placeholder="Last" required></input></div><br><br>
+        <label>Username</label><br>
+        <input name="account[uid]" required></input><br><br>
+        <label>Password</label><br>
+        <input name="account[password]" required></input><br>
+        <input name="account[password_confirmation]" placeholder="Confirm password" required></input><br><br>
+
+      </div>
+      <a href="/control_panel/accounts" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+      <button type="submit" class="btn pull-right"><%= fa 'check', "Create" %></button>
+    </form>
+  </div>
+</div>

@@ -1,15 +1,14 @@
 <div class="control-panel">
-  <a href="/control_panel" class="btn pull-right">Close</a>
+  <a href="/control_panel" class="btn pull-right"><%= fa 'arrow-up' %></a>
   <div class="heading">Accounts</div>
-  <a href='/control_panel/accounts/new' class="btn">New</a><br><br>
-  <div class="center-align">
+  <a href='/control_panel/accounts/new' class="btn"><%= fa 'plus', "New" %></a><br><br>
+  <div>
     <% @accounts.each do |account| %>
       <div class="account">
         <a href="/control_panel/accounts">
-          <p><%= account %></p>
+          <a href="/control_panel/accounts/?uid=<%= account[:uid] %>" class="btn"><%= "#{account[:uid]} (#{account[:name]})" %></a><br>
         </a>
       </div>
     <% end %>
-
   </div>
 </div>
