@@ -1,0 +1,15 @@
+<div class="control-panel">
+  <a href="/control_panel" class="btn pull-right">Close</a>
+  <div class="heading">Accounts</div>
+  <a href='/control_panel/accounts/new' class="btn">New</a><br><br>
+  <div class="center-align">
+    <% @accounts.each do |account| %>
+      <div class="account">
+        <a href="/control_panel/accounts">
+          <p><%= account %></p>
+        </a>
+      </div>
+    <% end %>
+
+  </div>
+</div>
