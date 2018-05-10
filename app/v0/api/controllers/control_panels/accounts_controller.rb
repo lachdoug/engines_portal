@@ -5,7 +5,7 @@ class V0
       get '/control_panel/accounts' do
         halt 401 unless current_user.is_admin?
         @accounts = system.engines_api_system.index_users_accounts
-        erb :'control_panel/accounts/index'
+        erb :'control_panels/accounts/index'
       end
 
     end
