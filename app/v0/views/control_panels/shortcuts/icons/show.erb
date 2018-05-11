@@ -6,7 +6,7 @@
     <image height="96" src="<%= @shortcut.icon_url + '?' + 'nocache=' + @shortcut.icon_updated_at? %>"><br>
     <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon/edit" class="btn"><%= fa 'file-image-o', "Upload" %></a>
     <% if @shortcut.shortcut_type == "engines_app" %>
-      <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon/engines_app/edit" class="btn"><%= fa 'image', "Default" %></a>
+      <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon/engines_app/edit" class="btn"><%= fa 'refresh', "Default" %></a>
     <% end %>
   </div>
   <% if @shortcut.icon_present? %>
