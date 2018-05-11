@@ -175,7 +175,7 @@ input, select {
 }
 
 .flash-alert, .flash-notice {
-  margin-top: 12px;
+  margin: 12px;
   text-align: center;
 }
 

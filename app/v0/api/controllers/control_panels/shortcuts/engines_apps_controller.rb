@@ -25,7 +25,7 @@ class V0
           if @icon_uploader.update_from_default
             redirect "/control_panel/shortcuts/#{ @shortcut.id }"
           else
-            redirect "/control_panel/shortcuts/#{ params[:id] }/icon", alert: "Failed to load icon."
+            redirect "/control_panel/shortcuts/#{ @shortcut.id }", alert: "Failed to load icon."
           end
         else
           redirect "/control_panel/shortcuts", alert: "Failed to create shortcut."

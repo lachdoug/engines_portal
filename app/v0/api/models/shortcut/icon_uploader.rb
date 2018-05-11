@@ -21,8 +21,11 @@ class V0
 
           def update_from_default
             file = Tempfile.new('icon_image')
+            # byebug
             file.write open( @shortcut.default_icon_url, ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE ).read
             save_image_from file.path
+          rescue Errno::ENOENT # no file
+            false
           end
 
           def save_image_from( filepath )
