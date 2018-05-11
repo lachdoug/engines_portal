@@ -30,6 +30,8 @@ class V0
             image = Magick::Image.read(filepath)[0]
             image.resize_to_fit! 256, 256
             image.write("data/v0/icons/#{@shortcut.id}")
+          rescue Magick::ImageMagickError
+            false
           end
 
         end

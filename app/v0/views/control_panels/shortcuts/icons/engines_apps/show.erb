@@ -10,7 +10,7 @@
         method="POST"
         action="/control_panel/shortcuts/<%= @shortcut.id %>/icon/engines_app/update">
         <input value="<%= @shortcut.default_icon_url %>" name="icon_url" type="hidden"></input>
-        <button type="submit" class="btn">Use default</button>
+        <button type="submit" class="btn"><%= fa 'check', "Use default" %></button>
       </form>
     <% else %>
       No default icon.
