@@ -1,0 +1,26 @@
+<div class="control-panel">
+  <a href="/control_panel" class="btn pull-right"><%= fa 'arrow-up' %></a>
+  <div class="heading">Email addresses</div>
+  <div id="email_addresses_list">
+    <div id="email_addresses_search" style="display: none;">
+      <input class="search" placeholder="Search" />
+    </div>
+    <ul class="list">
+      <% @email_addresses.each do |email_address| %>
+        <li class="email_address">
+          <% if email_address[:source_type] == "mailbox" || email_address[:source_type] == "alias" %>
+            <a href="/control_panel/accounts/?uid=<%= email_address[:user_uid] %>" class="btn"><span class="list-item"><%= "#{email_address[:email_address]} (#{email_address[:source_type]})" %></span></a><br>
+          <% else %>
+            <a href="/control_panel/distribution_groups/?name=<%= email_address[:distribution_group_name] %>" class="btn"><span class="list-item"><%= "#{email_address[:email_address]} (distribution group)" %></span></a><br>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+
+<script>
+  var userList = new List( 'email_addresses_list', { valueNames: [ 'list-item' ] } );
+  document.getElementById( "email_addresses_search" ).style.display = "block";
+</script>

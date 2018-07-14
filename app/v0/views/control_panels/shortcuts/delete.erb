@@ -1,12 +1,11 @@
 <div class="control-panel">
-  <div class="heading">Delete shortcut</div>
-  <div class="center-align">
-    <%= @shortcut.label %><br><br>
-    <form class="form" method="post" action="/control_panel/shortcuts/<%= @shortcut.id %>">
-      <input type="hidden" name="_method" value="DELETE">
-      <a href="/control_panel/shortcuts/<%= @shortcut.id %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
-      <button type="submit" class="btn pull-right"><%= fa 'check', "Delete" %></button>
-    </form>
-
-  </div>
+  <div class="heading">Delete shortcut: <%= @shortcut.label %></div>
+  <form class="form" method="post" action="/control_panel/shortcuts/<%= @shortcut.id %>">
+    <p>
+      Confirm delete?
+    </p>
+    <input type="hidden" name="_method" value="DELETE">
+    <a href="/control_panel/shortcuts/<%= @shortcut.id %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+    <button type="submit" class="btn pull-right"><%= fa 'check', "Delete" %></button>
+  </form>
 </div>

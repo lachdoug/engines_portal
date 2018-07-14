@@ -7,7 +7,7 @@
       class="form">
       <div class="left-align">
         <input value="<%= @shortcut.shortcut_type %>" name="shortcut[shortcut_type]" type="hidden"></input>
-        <label>Engines app</label><br>
+        <label class="label">Engines app</label><br>
         <select value="<%= @shortcut.engine_name %>" name="shortcut[engine_name]" required>
           <% system.apps.each do |app| %>
             <option value="<%= app %>"><%= app %></option>

@@ -1,0 +1,23 @@
+<div class="control-panel">
+  <div class="heading">Remove email from distribution group: <%= @distribution_group.name %></div>
+  <div class="center-align">
+    <form
+      method="POST"
+      action="/control_panel/distribution_groups/remove?name=<%= @distribution_group.name %>"
+      class="form">
+      <div class="left-align">
+        <p>
+          <label class="label">Remove email</label>
+            <select name="address" required>
+              <option value="" selected disabled>Select an email address</option>
+              <% @distribution_group.email_addresses.each do |email_address| %>
+                <option value="<%= email_address %>"><%= email_address %></option>
+              <% end %>
+            </select>
+        </p>
+      </div>
+      <a href="/control_panel/distribution_groups/?name=<%= @distribution_group.name %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+      <button type="submit" class="btn pull-right"><%= fa 'check', "Remove" %></button>
+    </form>
+  </div>
+</div>

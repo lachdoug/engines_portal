@@ -1,0 +1,17 @@
+<div class="control-panel">
+  <div class="heading">Change password for account: <%= "#{@account.uid} (#{@account.name.full_name})" %></div>
+  <div class="center-align">
+    <form
+      method="POST"
+      action="/control_panel/accounts/password?uid=<%= @account.uid %>"
+      class="form">
+      <div class="left-align">
+        <label class="label">New password</label><br>
+        <div><input name="account[password]" required autocomplete="off"></input></div>
+      </div>
+      <br>
+      <a href="/control_panel/accounts/?uid=<%= @account.uid %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+      <button type="submit" class="btn pull-right"><%= fa 'check', "Change" %></button>
+    </form>
+  </div>
+</div>

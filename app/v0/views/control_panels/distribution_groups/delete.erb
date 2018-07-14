@@ -1,0 +1,22 @@
+<div class="control-panel">
+  <div class="heading">Delete distribution group: <%= @distribution_group.name %></div>
+  <div class="center-align">
+
+  <form action = "/control_panel/distribution_groups/?name=<%= @distribution_group.name %>" method = "post" class="form">
+    <input type="hidden" name="_method" value="delete" />
+    <div class="left-align">
+      <p>
+        Confirm delete?
+        <% if @distribution_group.email_addresses.any? %>
+          <br>
+          <% length = @distribution_group.email_addresses.count %>
+          <label class="label"><input type="checkbox" required /> Remove <%= length %> email address<%= length == 1 ? "" : "es" %></label>
+        <% end %>
+      </p>
+    </div>
+    <a href="/control_panel/distribution_groups/?name=<%= @distribution_group.name %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+    <button type="submit" class="btn pull-right"><%= fa 'check', "Delete" %></button>
+  </form>
+
+  </div>
+</div>

@@ -1,24 +1,77 @@
 <div class="control-panel">
   <a href="/control_panel/shortcuts" class="btn pull-right"><%= fa 'arrow-up' %></a>
-  <% if @shortcut.shortcut_type == "link" %>
-    <div class="heading">Link to URL shortcut</div>
-  <% else %>
-    <div class="heading">Engines app shortcut</div>
-  <% end %>
-  <div class="center-align">
+  <div class="heading">Shortcut: <%= @shortcut.label %></div>
 
-    <%= @shortcut.label %><br>
-    <%= @shortcut.url %><br>
-    <% if @shortcut.shortcut_type == "link" %>
-      <a href="/control_panel/shortcuts/<%= @shortcut.id %>/link/edit" class="btn"><%= fa 'edit', "Edit" %></a><br>
-    <% else %>
-      <a href="/control_panel/shortcuts/<%= @shortcut.id %>/engines_app/edit" class="btn"><%= fa 'edit', "Edit" %></a><br>
-    <% end %>
-    <br><br>
-    <image height="96" src="<%= @shortcut.icon_url + '?' + 'nocache=' + @shortcut.icon_updated_at? %>"><br>
-    <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon" class="btn"><%= fa 'edit', "Edit icon" %></a><br><br>
-  </div>
-  <br>
-  <a href="/control_panel/shortcuts/<%= @shortcut.id %>/delete" class="btn"><%= fa 'trash-o', "Delete shortcut" %></a>
+  <table>
+    <tr>
+      <td class="table-label">Type</td>
+      <td><%= @shortcut.shortcut_type == "link" ? "Link to URL" : "Engines app" %></td>
+    </tr>
+  </table>
+  <hr>
+  <% if @shortcut.shortcut_type == "link" %>
+    <a href="/control_panel/shortcuts/<%= @shortcut.id %>/link/edit" class="btn pull-right"><%= fa 'edit', "Edit" %></a>
+  <% else %>
+    <a href="/control_panel/shortcuts/<%= @shortcut.id %>/engines_app/edit" class="btn pull-right"><%= fa 'edit', "Edit" %></a>
+  <% end %>
+  <table>
+    <tr>
+      <td class="table-label">Label</td>
+      <td><%= @shortcut.label %></td>
+    </tr>
+    <tr>
+      <td class="table-label">URL</td>
+      <td><%= @shortcut.url %></td>
+    </tr>
+  </table>
+  <hr>
+  <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon/edit" class="btn pull-right"><%= fa 'upload', "Upload" %></a>
+  <% if @shortcut.shortcut_type == "engines_app" %>
+    <a href="/control_panel/shortcuts/<%= @shortcut.id %>/icon/engines_app/edit" class="btn pull-right"><%= fa 'refresh', "Default" %></a>
+  <% end %>
+  <% if @shortcut.icon_present? %>
+    <form method="post" action="/control_panel/shortcuts/<%= @shortcut.id %>/icon">
+      <input type="hidden" name="_method" value="DELETE">
+      <button type="submit" class="btn pull-right"><%= fa 'ban', "Clear" %></button>
+    </form>
+  <% end %>
+
+
+  <table>
+    <tr>
+      <td class="table-label">Icon</td>
+      <td>
+        <div class="normal-icon-wrapper">
+          <div class="normal-icon">
+            <image src="<%= @shortcut.icon_url + '?' + 'nocache=' + @shortcut.icon_updated_at? %>">
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <hr>
+  <a href="/control_panel/shortcuts/<%= @shortcut.id %>/accounts" class="btn pull-right"><%= fa "share-alt", "Share" %></a>
+  <table>
+    <tr>
+      <td class="table-label">Share</td>
+      <td>
+      <% if @shortcut.all_accounts %>
+        Everyone
+      <% else %>
+        <% if @shortcut.account_shortcuts.empty? %>
+          <i>None</i>
+        <% end %>
+        <ul class="compact-list">
+          <% @shortcut.account_shortcuts.map do |account_shortcut| %>
+            <li><%= account_shortcut.account_uid %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      </td>
+    </tr>
+  </table>
+
+  <hr>
+  <a href="/control_panel/shortcuts/<%= @shortcut.id %>/delete" class="btn pull-right"><%= fa 'trash-o', "Delete" %></a>
 
 </div>

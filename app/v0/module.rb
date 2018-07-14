@@ -85,47 +85,6 @@ class V0 < Sinatra::Base
   helpers Api::Helpers
 
 
-  # ## Error handling
-  # ##----------------------------------------------------------------------------
-  #
-  # ## 400 Fatal: General client error
-  # ## 401 Non-fatal: Authentication failed
-  # ## 404 Fatal: Bad route
-  # ## 405 Non-fatal: Action not allowed (route is recognised, but action cannot be performed)
-  # ## 406 Fatal: Params not acceptable (route is recognised, but params incomplete or invalid)
-  # ## 500 Fatal: General server error
-  # ## 503 Non-fatal: System busy or unavailable
-
-  set show_exceptions: false
-
-  error do |error|
-    content_type :json
-    if error.is_a?(NonFatalError)
-      [ error.status_code, { error: { message: error.message } }.to_json ]
-    else
-      error_text = error.class.to_s + " (" + error.message + ")"
-      if error.respond_to?(:response) && error.response.respond_to?(:net_http_res) && !error.response.net_http_res.body.empty?
-        response = JSON.parse(error.response.net_http_res.body, symbolize_names: true)
-        system_error = response[:error_object] || response[:error]
-        system_error_message = system_error[:error_mesg] || system_error[:message]
-        error_text += "\n\n#{system_error_message}"
-      end
-      [ 500, { error: { message: "Server error.",
-        detail: {
-          application: "Portal ApiV0 v0.1",
-          type: :Server500,
-          text: error_text,
-          method: request.request_method,
-          path: request.fullpath,
-          backtrace: error.backtrace,
-      } } }.to_json ]
-    end
-  end
-
-  not_found do
-    404
-  end
-
   ## ERB
   ##----------------------------------------------------------------------------
 
@@ -136,10 +95,17 @@ class V0 < Sinatra::Base
       elsif  opts[:alert]
         { alert: opts[:alert] }
       end
+      # byebug
     super route
   end
 
+  # def session
+  #   byebug
+  #   super
+  # end
+
   def flash
+    # byebug
     return @flash if @flash
     @flash = session[:flash] || {}
     session[:flash] = nil
@@ -161,9 +127,15 @@ class V0 < Sinatra::Base
   before do
     begin
       no_auth? || authenticate_user
-    rescue NonFatalError
-      redirect '/sign_in'
+      halt 401 if is_control_panel? && !current_user.is_admin?
+      # byebug
+    # rescue NonFatalError => e
+    #   redirect '/sign_in', alert: e.message
     end
+  end
+
+  def is_control_panel?
+    request.path_info.split("/")[1] == "control_panel"
   end
 
   def no_auth?
@@ -188,8 +160,17 @@ class V0 < Sinatra::Base
 
   def authenticate_user
     user = Api::Models::User.new session, request, settings
-    @current_user = user if user.authenticated?
+    if user.authenticated?
+      @current_user = user
+    else
+      session.clear
+      @current_user = nil
+    end
   end
+
+  # def clear_current_user
+  #
+  # end
 
   ## Set core resources
   ##----------------------------------------------------------------------------
@@ -209,6 +190,57 @@ class V0 < Sinatra::Base
           "<i class='fa fa-#{type}'></i>#{ text ? ' ' + text : nil }"
         end
   end
+
+  # ## Error handling
+  # ##----------------------------------------------------------------------------
+  #
+  # ## 400 Fatal: General client error
+  # ## 401 Non-fatal: Authentication failed
+  # ## 404 Fatal: Bad route
+  # ## 405 Non-fatal: Action not allowed (route is recognised, but action cannot be performed)
+  # ## 406 Fatal: Params not acceptable (route is recognised, but params incomplete or invalid)
+  # ## 500 Fatal: General server error
+  # ## 503 Non-fatal: System busy or unavailable
+
+  set show_exceptions: false
+
+  error do |error|
+    content_type :json
+    if error.is_a?(NonFatalError)
+      if error.status_code == 401
+        redirect '/sign_in', alert: error.message
+      else
+        redirect '/user/portal', alert: error.message
+      end
+    else
+      [ 500, { error: {
+        message: "Server error.", detail: fatal_error_detail( error )
+      } }.to_json ]
+    end
+  end
+
+  def fatal_error_detail( error )
+    error_text = error.class.to_s + " (" + error.message + ")"
+    if error.respond_to?(:response) && error.response.respond_to?(:net_http_res) && !error.response.net_http_res.body.empty?
+      response = JSON.parse(error.response.net_http_res.body, symbolize_names: true)
+      system_error = response[:error_object] || response[:error]
+      system_error_message = system_error[:error_mesg] || system_error[:message]
+      error_text += "\n\n#{system_error_message}"
+    end
+    {
+        application: "Portal ApiV0 v0.1",
+        type: :Server500,
+        text: error_text,
+        method: request.request_method,
+        path: request.fullpath,
+        backtrace: error.backtrace,
+    }
+  end
+
+  not_found do
+    404
+  end
+
 
 
 end

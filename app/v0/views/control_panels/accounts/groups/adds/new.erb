@@ -1,0 +1,30 @@
+<div class="control-panel">
+  <div class="heading">Add groups to account: <%= "#{@account.uid} (#{@account.name.full_name})" %></div>
+  <div class="center-align">
+    <% if @groups.available_groups.empty? %>
+      <p>No groups left to add.</p>
+      <a href="/control_panel/accounts/?uid=<%= @account.uid %>" class="btn"><%= fa 'check', "OK" %></a>
+    <% else %>
+      <form
+        method="POST"
+        action="/control_panel/accounts/groups/add?uid=<%= @account.uid %>"
+        class="form">
+        <div class="left-align">
+          <label class="label">Add groups</label><br>
+          <div>
+            <% @groups.available_groups.each do |group| %>
+              <label>
+                <input type="checkbox" name="group_dns[]" value="<%= group.dn %>"></input>
+                <%= group.name %>
+              </label><br>
+            <% end %>
+          </div>
+        </div>
+        <br>
+        <a href="/control_panel/accounts/?uid=<%= @account.uid %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+        <button type="submit" class="btn pull-right"><%= fa 'check', "Add" %></button>
+      </form>
+    <% end %>
+
+  </div>
+</div>

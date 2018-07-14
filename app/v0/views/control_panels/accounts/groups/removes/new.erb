@@ -1,0 +1,28 @@
+<div class="control-panel">
+  <div class="heading">Account: <%= "#{@account.uid} (#{@account.name.full_name})" %></div>
+  <div class="center-align">
+    <form
+      method="POST"
+      action="/control_panel/accounts/groups/remove?uid=<%= @account.uid %>"
+      class="form">
+      <div class="left-align">
+        <label class="label">Remove groups</label><br>
+        <div>
+          <% @groups.each do |group| %>
+            <label>
+              <% is_disabled = current_user.user_name == @account.uid &&
+              group.dn == "cn=administrators,ou=Groups,dc=engines,dc=internal" %>
+              <input type="checkbox" name="group_dns[]" value="<%= group.dn %>"
+              <%= is_disabled ? "disabled" : "" %> >
+              </input>
+              <%= group.name %> <small><%= "(Signed in)" if is_disabled %></small>
+            </label><br>
+          <% end %>
+        </div>
+      </div>
+      <br>
+      <a href="/control_panel/accounts/?uid=<%= @account.uid %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+      <button type="submit" class="btn pull-right"><%= fa 'check', "Remove" %></button>
+    </form>
+  </div>
+</div>

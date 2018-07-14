@@ -5,9 +5,9 @@
   <div>
     <% @accounts.each do |account| %>
       <div class="account">
-        <a href="/control_panel/accounts">
-          <a href="/control_panel/accounts/?uid=<%= account[:uid] %>" class="btn"><%= "#{account[:uid]} (#{account[:name]})" %></a><br>
-        </a>
+        
+        <a href="/control_panel/accounts/?uid=<%= account[:uid] %>" class="btn"><%= "#{account[:uid]} (#{account[:name]})" %></a><br>
+
       </div>
     <% end %>
   </div>

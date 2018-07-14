@@ -1,0 +1,17 @@
+<div class="control-panel">
+  <a href="/control_panel" class="btn pull-right"><%= fa 'arrow-up' %></a>
+  <div class="heading">Distribution groups</div>
+  <a href="/control_panel/distribution_groups/new" class="btn"><%= fa 'plus', "New" %></a>
+  <hr>
+  <div>
+    <% @distribution_groups.each do |distribution_group| %>
+      <div class="distribution_group">
+        <a href="/control_panel/distribution_groups/?name=<%= distribution_group[:name] %>" class="btn">
+          <%= distribution_group[:name] %><br>
+          <div class="button-comment"><small><%= distribution_group[:description] %></small></div>
+        </a><br>
+
+      </div>
+    <% end %>
+  </div>
+</div>

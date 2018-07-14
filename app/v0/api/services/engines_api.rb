@@ -10,6 +10,7 @@ class V0
           @session = session
         end
         attr_reader :url, :session
+        
 
         def system
           System.new self

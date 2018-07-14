@@ -1,0 +1,25 @@
+<div class="control-panel">
+  <div class="heading">Add email alias to account: <%= "#{@account.uid} (#{@account.name.full_name})" %></div>
+  <div class="center-align">
+    <form
+      method="POST"
+      action="/control_panel/accounts/email/aliases/add?uid=<%= @account.uid %>"
+      class="form">
+      <div class="left-align">
+        <label class="label">Local part (before the @)</label><br>
+        <input name="email_alias[local_part]"></input>
+        <label class="label">Domain</label><br>
+        <div>
+          <select name="email_alias[domain]" required>
+            <% @aliases.system_email[:domains].each do |domain| %>
+              <option value="<%= domain %>" <%= "selected" if domain === @aliases.system_email[:default_domain] %>><%= domain %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+      <br>
+      <a href="/control_panel/accounts/?uid=<%= @account.uid %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+      <button type="submit" class="btn pull-right"><%= fa 'check', "Add" %></button>
+    </form>
+  </div>
+</div>

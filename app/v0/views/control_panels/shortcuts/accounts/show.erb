@@ -1,0 +1,59 @@
+<div class="control-panel">
+  <a href="/control_panel/shortcuts/<%= @shortcut.id %>" class="btn pull-right"><%= fa 'arrow-up' %></a>
+  <div class="heading">Share shortcut: <%= @shortcut.label %></div>
+
+  <% if @shortcut.all_accounts %>
+    <form action = "/control_panel/shortcuts/<%= @shortcut.id %>/accounts/all" method = "post">
+      <input type="hidden" name="_method" value="delete" />
+      <button type="submit" class="btn pull-right"><%= fa 'times', "No" %></button>
+    </form>
+  <% else %>
+    <form action = "/control_panel/shortcuts/<%= @shortcut.id %>/accounts/all" method = "post">
+      <button type="submit" class="btn pull-right"><%= fa 'check', "Yes" %></button>
+    </form>
+  <% end %>
+  <table>
+    <tr>
+      <td class="table-label">Everyone</td>
+      <td>
+        <%= @shortcut.all_accounts ? fa( "check", "Yes" ) : fa( "times", "No" ) %>
+      </td>
+    </tr>
+  </table>
+
+  <% unless @shortcut.all_accounts %>
+    <hr>
+
+    <table class="list-table">
+      <form action = "/control_panel/shortcuts/<%= @shortcut.id %>/accounts" method = "post">
+        <tr>
+          <td>
+            <select name="account_shortcut[account_uid]" required>
+              <option value="" disabled selected>Select account for share</option>
+              <% @shortcut.available_accounts( system ).each do |account| %>
+                <option value="<%= account[:uid] %>"><%= "#{account[:uid]} (#{account[:name]})" %></option>
+              <% end %>
+            </select>
+          </td>
+          <td class="button-col">
+            <button type="submit" class="btn pull-right"><%= fa 'plus', "Add" %></button>
+          </td>
+        </tr>
+      </form>
+      <% @shortcut.account_shortcuts.each do |account_shortcut| %>
+        <tr class="table-list-item">
+          <td><%= account_shortcut.account_uid %></td>
+          <td class="button-col">
+            <form action = "/control_panel/account_shortcuts/<%= account_shortcut.id %>" method = "post">
+              <input type="hidden" name="_method" value="delete" />
+              <button type="submit" class="btn pull-right"><%= fa 'minus', "Remove" %></button>
+            </form>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+  <% end %>
+
+
+</div>

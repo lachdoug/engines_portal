@@ -1,18 +1,17 @@
 <div class="control-panel">
   <a href="/control_panel" class="btn pull-right"><%= fa 'arrow-up' %></a>
   <div class="heading">Shortcuts</div>
-  <a href='/control_panel/shortcuts/new' class="btn"><%= fa 'plus', "New" %></a><br><br>
-  <div class="center-align">
-    <% @shortcuts.each do |shortcut| %>
-      <div class="shortcut">
-        <a href="/control_panel/shortcuts/<%= shortcut.id %>">
-          <div class="img-wrapper">
+  <a href='/control_panel/shortcuts/new' class="btn"><%= fa 'plus', "New" %></a>
+  <hr>
+  <% @shortcuts.each do |shortcut| %>
+      <a href="/control_panel/shortcuts/<%= shortcut.id %>" class="btn">
+        <div class="small-icon-wrapper">
+          <div class="small-icon">
             <img src="<%= shortcut.icon_url + '?' + 'nocache=' + shortcut.icon_updated_at? %>"></img>
           </div>
-          <p><%= shortcut.label %></p>
-        </a>
-      </div>
-    <% end %>
+        </div>
+        <%= shortcut.label %>
+      </a><br>
+  <% end %>
 
-  </div>
 </div>

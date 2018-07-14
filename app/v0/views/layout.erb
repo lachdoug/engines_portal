@@ -5,6 +5,7 @@
   <title>Engines portal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/v0/vendor/font-awesome-4.7.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="/v0/vendor/listjs-1.5.0.min.js"></script>
   <link rel="icon" href="/v0/favicon.png" type="image/png">
 	<style>
 		<%= application_css_files %>
@@ -12,6 +13,8 @@
 </head>
 <body>
 	<%= navbar %>
+	<div class="flash-alert"><%= flash[:alert] %></div>
+	<div class="flash-notice"><%= flash[:notice] %></div>
   <%= yield %>
 
 	<script>

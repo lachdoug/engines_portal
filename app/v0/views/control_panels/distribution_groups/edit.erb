@@ -1,0 +1,30 @@
+<div class="control-panel">
+  <div class="heading">Edit distribution group: <%= @distribution_group.name %></div>
+  <div class="center-align">
+    <form
+      method="POST"
+      action="/control_panel/distribution_groups/?name=<%= @distribution_group.name %>"
+      class="form">
+      <div class="left-align">
+        <p>
+          <label class="label">Local part (before the @)</label><br>
+          <input name="distribution_group[local_part]" value="<%= @distribution_group.local_part %>"></input>
+        </p>
+        <p>
+          <label class="label">Domain</label>
+          <select name="distribution_group[domain]" required>
+            <% @system_email[:domains].each do |domain| %>
+              <option value="<%= domain %>" <%= "selected" if domain === @distribution_group.domain %>><%= domain %></option>
+            <% end %>
+          </select>
+        </p>
+        <p>
+          <label class="label">Description</label><br>
+          <textarea name="distribution_group[description]"><%= @distribution_group.description %></textarea>
+        </p>
+      </div>
+      <a href="/control_panel/distribution_groups/?name=<%= @distribution_group.name %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+      <button type="submit" class="btn pull-right"><%= fa 'check', "Update" %></button>
+    </form>
+  </div>
+</div>

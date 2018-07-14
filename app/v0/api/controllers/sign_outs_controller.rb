@@ -3,7 +3,7 @@ class V0
     module Controllers
 
       get '/sign_out' do
-        current_user.sign_out if current_user
+        current_user && current_user.sign_out && @current_user = nil
         erb :signed_out
       end
 

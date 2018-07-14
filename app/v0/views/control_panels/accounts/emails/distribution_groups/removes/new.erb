@@ -1,0 +1,24 @@
+<div class="control-panel">
+  <div class="heading">Remove email distribution group from account: <%= "#{@account.uid} (#{@account.name.full_name})" %></div>
+  <div class="center-align">
+    <form
+      method="POST"
+      action="/control_panel/accounts/email/distribution_groups/remove?uid=<%= @account.uid %>"
+      class="form">
+      <div class="left-align">
+        <label class="label">Distribution Group</label><br>
+        <div>
+          <select name="distribution_group_name_and_email_address" required>
+            <option value="" selected disabled>Select distribution group to remove</option>
+            <% @distribution_groups.each do |distribution_group| %>
+              <option value="<%= distribution_group.distribution_group_name_and_email_address %>"><%= distribution_group.label %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+      <br>
+      <a href="/control_panel/accounts/?uid=<%= @account.uid %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+      <button type="submit" class="btn pull-right"><%= fa 'check', "Remove" %></button>
+    </form>
+  </div>
+</div>

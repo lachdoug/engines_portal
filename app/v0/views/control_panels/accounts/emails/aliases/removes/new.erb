@@ -1,0 +1,24 @@
+<div class="control-panel">
+  <div class="heading">Remove email alias from account: <%= "#{@account.uid} (#{@account.name.full_name})" %></div>
+  <div class="center-align">
+    <form
+      method="POST"
+      action="/control_panel/accounts/email/aliases/remove?uid=<%= @account.uid %>"
+      class="form">
+      <div class="left-align">
+        <label class="label">Alias</label><br>
+        <div>
+          <select name="email_alias" required>
+            <option value="" selected disabled>Select alias to remove</option>
+            <% @aliases.each do |email_alias| %>
+              <option value="<%= email_alias.email_address %>"><%= email_alias.email_address %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+      <br>
+      <a href="/control_panel/accounts/?uid=<%= @account.uid %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+      <button type="submit" class="btn pull-right"><%= fa 'check', "Remove" %></button>
+    </form>
+  </div>
+</div>

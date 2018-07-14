@@ -1,0 +1,37 @@
+<div class="control-panel">
+  <div class="heading">Add email to distribution group: <%= @distribution_group.name %></div>
+  <div class="center-align">
+    <form
+      method="POST"
+      action="/control_panel/distribution_groups/add?name=<%= @distribution_group.name %>"
+      class="form">
+      <div class="left-align">
+        <p>
+          <label class="label">Add email</label>
+          <% if @input %>
+            <a href="/control_panel/distribution_groups/add/new?name=<%= @distribution_group.name %>" class="btn">
+              <%= fa 'caret-down', "Select" %>
+            </a>
+            <input name="email_address[address]" placeholder="Enter an email address" required></input>
+          <% else %>
+            <a href="/control_panel/distribution_groups/add/new?name=<%= @distribution_group.name %>&input=true" class="btn">
+              <%= fa 'i-cursor', "Input" %>
+            </a>
+            <% if @distribution_group.available_email_addresses.empty? %>
+              <span style="height: 35px; display: block; line-height: 35px;">No email addresses left to select.</span>
+            <% else %>
+              <select name="email_address[address]" required>
+                <option value="" selected disabled>Select an email address</option>
+                <% @distribution_group.available_email_addresses.each do |email_address| %>
+                  <option value="<%= email_address %>"><%= email_address %></option>
+                <% end %>
+              </select>
+            <% end %>
+          <% end %>
+        </p>
+      </div>
+      <a href="/control_panel/distribution_groups/?name=<%= @distribution_group.name %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+      <button type="submit" class="btn pull-right"><%= fa 'check', "Create" %></button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="control-panel">
+  <a href="/control_panel/distribution_groups" class="btn pull-right"><%= fa 'arrow-up' %></a>
+  <div class="heading">Distribution group: <%= @distribution_group.name %></div>
+
+  <a href="/control_panel/distribution_groups/delete?name=<%= @distribution_group.name %>" class="btn pull-right"><%= fa "trash-o", "Delete" %></a>
+  <a href="/control_panel/distribution_groups/edit?name=<%= @distribution_group.name %>" class="btn pull-right"><%= fa "edit", "Edit" %></a>
+  <table>
+    <tr>
+      <td class="table-label">Email address</td>
+      <td><%= @distribution_group.name %><br></td>
+    </tr>
+    <tr>
+      <td class="table-label">Description</td>
+      <td><%= @distribution_group.description %><br></td>
+    </tr>
+  </table>
+  <hr>
+
+  <% if @distribution_group.email_addresses.empty? %>
+    <button class="btn btn-disabled pull-right"><%= fa "minus", "Remove" %></button>
+  <% else %>
+    <a href="/control_panel/distribution_groups/remove/new?name=<%= @distribution_group.name %>" class="btn pull-right"><%= fa "minus", "Remove" %></a>
+  <% end %>
+  <a href="/control_panel/distribution_groups/add/new?name=<%= @distribution_group.name %>" class="btn pull-right"><%= fa "plus", "Add" %></a>
+
+  <ul>
+    <% @distribution_group.email_addresses.each do |email_address| %>
+      <li><%= email_address %></li>
+    <% end %>
+  </ul>
+
+
+
+</div>

@@ -3,14 +3,39 @@ class V0
     module Controllers
 
       get '/control_panel/accounts' do
-        halt 401 unless current_user.is_admin?
-        @accounts = system.accounts
+        @accounts = system.accounts.index
         erb :'control_panels/accounts/index'
       end
 
       get '/control_panel/accounts/new' do
-        halt 401 unless current_user.is_admin?
         erb :'control_panels/accounts/new'
+      end
+
+      get '/control_panel/accounts/' do
+        @account = system.accounts.find( params[:uid] )
+        erb :'control_panels/accounts/show'
+      end
+
+      post '/control_panel/accounts' do
+        @account = system.accounts.create params[:account]
+        redirect "/control_panel/accounts/?uid=#{ params[:account][:uid] }"
+      end
+
+      delete '/control_panel/accounts/' do
+        @account = system.accounts.find( params[:uid] )
+        if @account.groups.empty? && @account.email.disabled?
+          begin
+            @account.delete
+            redirect "/control_panel/accounts"
+          rescue V0::NonFatalError
+            redirect "/control_panel/accounts/?uid=#{ params[:uid] }", alert: "Failed to delete account."
+          end
+        else
+          redirect "/control_panel/accounts/?uid=#{ params[:uid] }",
+           alert: "Can't delete "\
+                  "account when groups are present or "\
+                  "email is enabled."
+        end
       end
 
     end

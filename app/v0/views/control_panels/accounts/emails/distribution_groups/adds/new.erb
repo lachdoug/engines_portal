@@ -1,0 +1,29 @@
+<div class="control-panel">
+  <div class="heading">Add email distribution group to account: <%= "#{@account.uid} (#{@account.name.full_name})" %></div>
+  <div class="center-align">
+    <% if @distribution_groups.available.empty? %>
+      <p>No distribution groups left to add.</p>
+      <a href="/control_panel/accounts/?uid=<%= @account.uid %>" class="btn"><%= fa 'check', "OK" %></a>
+    <% else %>
+      <form
+        method="POST"
+        action="/control_panel/accounts/email/distribution_groups/add?uid=<%= @account.uid %>"
+        class="form">
+        <div class="left-align">
+          <label class="label">Distribution group</label><br>
+          <div>
+            <select name="distribution_group[name]" required>
+              <option value="" selected disabled>Select distribution group to add</option>
+              <% @distribution_groups.available.each do |distribution_group| %>
+                <option value="<%= distribution_group %>"><%= distribution_group %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <br>
+        <a href="/control_panel/accounts/?uid=<%= @account.uid %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+        <button type="submit" class="btn pull-right"><%= fa 'check', "Add" %></button>
+      </form>
+    <% end %>
+  </div>
+</div>

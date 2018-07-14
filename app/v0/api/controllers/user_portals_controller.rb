@@ -3,7 +3,7 @@ class V0
     module Controllers
 
       get '/user/portal' do
-        @shortcuts = Shortcut.for( current_user )
+        @shortcuts = current_user.shortcuts
         erb :user_portal
       end
 

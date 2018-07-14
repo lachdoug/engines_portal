@@ -3,13 +3,9 @@ class V0
     module Models
       class Shortcut < ActiveRecord::Base
 
-        default_scope { order('lower(label)') }
-
         attr_reader :websites, :default_icon_url
 
-        def self.for( current_user )
-          self.all
-        end
+        has_many :account_shortcuts, -> { order(account_uid: :asc) }, dependent: :destroy
 
         def icon_url
           if icon_present?
@@ -57,6 +53,10 @@ class V0
           load_app_websites_from system
           self.url = @websites[0]
           load_default_icon_url_from system
+        end
+
+        def available_accounts( system )
+          system.accounts.index.reject { |account| account_shortcuts.find_by( { account_uid: account[:uid] } ) }
         end
 
       end

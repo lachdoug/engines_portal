@@ -11,16 +11,22 @@ class V0
         end
         attr_reader :url
 
+        def set_token( token )
+          @engines_api = nil
+          @api = nil
+          @token = token
+        end
+
         def engines_api
           @engines_api ||= Services::EnginesApi.new( @url, @token, @settings, @session )
         end
 
-        def engines_api_system
-          @engines_api_system ||= engines_api.system
+        def api
+          @api ||= engines_api.system
         end
 
         def sign_in(params)
-          engines_api_system.sign_in( {
+          api.sign_in( {
             user_name: params[:user_name],
             password: params[:password],
             ip_address: params[:ip_address]
@@ -37,7 +43,7 @@ class V0
         end
 
         def dn_lookup(params)
-          engines_api_system.dn_lookup params
+          api.dn_lookup params
         rescue NonFatalError => e
           if e.status_code == 401
             raise NonFatalError.new "Invalid username or password.", 401
@@ -47,35 +53,42 @@ class V0
         end
 
         def apps
-          engines_api_system.app_statuses.keys.sort
+          api.app_statuses.keys.sort
         end
 
         def label_for(app_name)
-          blueprint = engines_api_system.blueprint_for app_name
+          blueprint = api.blueprint_for app_name
           label = blueprint[:metadata] &&
           blueprint[:metadata][:display] &&
           blueprint[:metadata][:display][:label]
           label || app_name
-        # rescue
-        #   app_name
         end
 
         def websites_for(app_name)
-          engines_api_system.websites_for app_name
-        # rescue
-        #   [ "http://www.smh.com.au", "http://google.com" ]
+          api.websites_for app_name
         end
 
-        def icon_url_for(app_name)
-          engines_api_system.icon_url_for app_name
-        # rescue
-        #   "https://www.freelogodesign.org/img/logo-ex-7.png"
+        def icon_url_for( app_name )
+          api.icon_url_for app_name
         end
 
         def accounts
-          engines_api_system.index_users_accounts.sort_by { |account| account[:uid] }
+          @accounts ||= Accounts.new self
         end
 
+        def email_addresses
+          # @email_addresses ||= EmailAddresses.new self
+          api.index_email_email_addresses
+        end
+
+        def distribution_groups
+          @distribution_groups ||= DistributionGroups.new self
+        end
+
+        def email
+          # @email ||= Email.new self
+          api.show_email
+        end
 
       end
     end

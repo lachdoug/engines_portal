@@ -10,13 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_06_222055) do
+ActiveRecord::Schema.define(version: 2018_07_13_060210) do
+
+  create_table "account_shortcuts", force: :cascade do |t|
+    t.integer "shortcut_id"
+    t.string "account_uid"
+  end
 
   create_table "shortcuts", force: :cascade do |t|
     t.string "label"
     t.string "url"
     t.string "shortcut_type"
     t.string "engine_name"
+    t.boolean "all_accounts"
   end
 
 end

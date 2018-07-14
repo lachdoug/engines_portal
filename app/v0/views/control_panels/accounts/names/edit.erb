@@ -1,0 +1,18 @@
+<div class="control-panel">
+  <div class="heading">Edit name for account: <%= "#{@account.uid} (#{@account.name.full_name})" %></div>
+  <div class="center-align">
+    <form
+      method="POST"
+      action="/control_panel/accounts/name?uid=<%= @name.uid %>"
+      class="form">
+      <div class="left-align">
+        <label class="label">Name</label><br>
+        <div><input name="name[first_name]" value="<%= @name.first_name %>" placeholder="First" required></input></div>
+        <div><input name="name[last_name]" value="<%= @name.last_name %>" placeholder="Last" required></input></div>
+      </div>
+      <br>
+      <a href="/control_panel/accounts/?uid=<%= @name.uid %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+      <button type="submit" class="btn pull-right"><%= fa 'check', "Update" %></button>
+    </form>
+  </div>
+</div>

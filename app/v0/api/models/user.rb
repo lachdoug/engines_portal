@@ -15,6 +15,9 @@ class V0
             user_name: dn[:dn],
             password: params[:password],
             ip_address: @request.ip } )
+          system.set_token( system_api_token )
+          user_detail = system.api.show_users_account( params[:uid] )
+          @session[:is_admin] = !!user_detail[:groups].find { |group| group[:dn] == "cn=administrators,ou=Groups,dc=engines,dc=internal" }
           @session[:system_api_token] = system_api_token
           @session[:timestamp] = Time.now.to_i
           @session[:uid] = params[:uid]
@@ -50,8 +53,15 @@ class V0
         end
 
         def is_admin?
-          @session[:uid] == "admin"
+          @session[:is_admin]
         end
+
+        def shortcuts
+          @shortcuts ||= (
+            AccountShortcut.where( account_uid: user_name ).map( &:shortcut ).sort_by { |v| v.label.downcase } +
+            Shortcut.where( all_accounts: true ) ).uniq.sort_by { |shortcut| shortcut.label.downcase }
+        end
+
 
         private
 

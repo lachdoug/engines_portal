@@ -1,0 +1,130 @@
+<div class="control-panel">
+  <a href="/control_panel/accounts" class="btn pull-right"><%= fa 'arrow-up' %></a>
+  <div class="heading">Account: <%= "#{@account.uid} (#{@account.name.full_name})" %></div>
+  <div>
+    <a href="/control_panel/accounts/password/edit?uid=<%= @account.uid %>" class="btn pull-right"><%= fa "user-secret", "Password" %></a>
+    <table>
+      <tr>
+        <td class="table-label">Username</td>
+        <td><%= @account.uid %></td>
+      </tr>
+    </table>
+
+    <hr>
+    <a href="/control_panel/accounts/name/edit?uid=<%= @account.uid %>" class="btn pull-right"><%= fa 'edit', "Edit" %></a>
+    <table>
+      <tr>
+        <td class="table-label">First name</td>
+        <td><%= @account.name.first_name %></td>
+      </tr>
+      <tr>
+        <td class="table-label">Last name</td>
+        <td><%= @account.name.last_name %></td>
+      </tr>
+    </table>
+
+
+
+    <hr>
+    <% if @account.email.disabled? %>
+      <a href="/control_panel/accounts/setup_email/new?uid=<%= @account.uid %>" class="btn pull-right"><%= fa "check", "Enable" %></a>
+      <table>
+        <tr>
+          <td class="table-label">Email</td>
+          <td><i>Email not enabled</i></td>
+        </tr>
+      </table>
+    <% else %>
+      <form action = "/control_panel/accounts/setup_email?uid=<%= @account.uid %>" method = "post">
+        <input type="hidden" name="_method" value="delete" />
+        <button type="submit" class="btn pull-right"><%= fa 'times', "Disable" %></button>
+      </form>
+      <a href="/control_panel/accounts/email/mailbox/edit?uid=<%= @account.uid %>" class="btn pull-right"><%= fa 'edit', "Change" %></a>
+      <table>
+        <tr>
+          <td class="table-label">Mailbox</td>
+          <td><%= @account.email.mailbox.address %></td>
+        </tr>
+      </table>
+      <br>
+      <% if @account.email.aliases.empty? %>
+        <button class="btn btn-disabled pull-right"><%= fa "minus", "Remove" %></button>
+      <% else %>
+        <a href="/control_panel/accounts/email/aliases/remove/new?uid=<%= @account.uid %>" class="btn pull-right"><%= fa "minus", "Remove" %></a>
+      <% end %>
+      <a href="/control_panel/accounts/email/aliases/add/new?uid=<%= @account.uid %>" class="btn pull-right"><%= fa "plus", "Add" %></a>
+      <table>
+        <tr>
+          <td class="table-label">Aliases</td>
+          <td>
+            <% if @account.email.aliases.empty? %>
+              <i>No aliases</i>
+            <% else %>
+              <ul class="compact-list">
+                <% @account.email.aliases.each do |email_alias| %>
+                  <li><%= email_alias.email_address %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <% if @account.email.distribution_groups.empty? %>
+        <button class="btn btn-disabled pull-right"><%= fa "minus", "Remove" %></button>
+      <% else %>
+        <a href="/control_panel/accounts/email/distribution_groups/remove/new?uid=<%= @account.uid %>" class="btn pull-right"><%= fa "minus", "Remove" %></a>
+      <% end %>
+      <a href="/control_panel/accounts/email/distribution_groups/add/new?uid=<%= @account.uid %>" class="btn pull-right"><%= fa "plus", "Add" %></a>
+      <table>
+        <tr>
+          <td class="table-label">Distribution groups</td>
+          <td>
+            <% if @account.email.distribution_groups.empty? %>
+              <i>No distribution groups</i>
+            <% else %>
+              <ul class="compact-list">
+                <% @account.email.distribution_groups.each do |distribution_group| %>
+                  <li><%= distribution_group.label %>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    <% end %>
+
+    <hr>
+    <% if @account.groups.empty? %>
+      <button class="btn btn-disabled pull-right"><%= fa "minus", "Remove" %></button>
+    <% else %>
+      <a href="/control_panel/accounts/groups/remove/new?uid=<%= @account.uid %>" class="btn pull-right"><%= fa "minus", "Remove" %></a>
+    <% end %>
+    <a href="/control_panel/accounts/groups/add/new?uid=<%= @account.uid %>" class="btn pull-right"><%= fa "plus", "Add" %></a>
+    <table>
+      <tr>
+        <td class="table-label">Groups</td>
+        <td>
+          <% if @account.groups.empty? %>
+          <i>No groups</i>
+          <% else %>
+          <ul class="compact-list">
+            <% @account.groups.each do |group| %>
+              <li><%= group.name %></li>
+            <% end %>
+          </ul>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+
+    <hr>
+    <form action = "/control_panel/accounts/?uid=<%= @account.uid %>" method = "post">
+      <input type="hidden" name="_method" value="delete" />
+      <button type="submit" class="btn pull-right"><%= fa 'trash-o', "Delete" %></button>
+    </form>
+
+
+  </div>
+</div>

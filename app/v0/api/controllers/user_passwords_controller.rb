@@ -15,7 +15,7 @@ class V0
               user.sign_in(
                 system( without_token: true ),
                 { uid: session[:uid], password: params[:current_password] } )
-              system.engines_api_system.update_users_account_password( session[:uid], params[:new_password] )
+              system.api.update_users_account_password( session[:uid], params[:new_password] )
               user.sign_out
               redirect "/user/password/success"
             rescue NonFatalError

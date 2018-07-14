@@ -1,0 +1,23 @@
+<div class="control-panel">
+  <div class="heading">Change mailbox for Account: <%= "#{@account.uid} (#{@account.name.full_name})" %></div>
+  <div class="center-align">
+    <form
+      method="POST"
+      action="/control_panel/accounts/email/mailbox?uid=<%= @account.uid %>"
+      class="form">
+      <div class="left-align">
+        <label class="label">Mailbox domain</label><br>
+        <div>
+          <select name="mailbox[domain]" required>
+            <% @mailbox.domains.each do |domain| %>
+              <option value="<%= domain %>" <%= "selected" if domain === @mailbox.domain %>><%= domain %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+      <br>
+      <a href="/control_panel/accounts/?uid=<%= @account.uid %>" class="btn pull-left"><%= fa 'times', "Cancel" %></a>
+      <button type="submit" class="btn pull-right"><%= fa 'check', "Change" %></button>
+    </form>
+  </div>
+</div>
