@@ -7,13 +7,14 @@ Framework
 ---------
 Sinatra (module style, with config.ru)
 
-Needs
------
+Requirements
+------------
 public directory: public   
 persistent volume: data
 
 /Uses activerecord and rake/
 In production $DATABASE_URL environment variable will be read as the database
+needs rake db:migrate
 
 /Image processing/
 System: Magick

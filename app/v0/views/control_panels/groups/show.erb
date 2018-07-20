@@ -1,0 +1,9 @@
+<div class="control-panel">
+  <a href="/control_panel/groups" class="btn pull-right"><%= fa 'arrow-up' %></a>
+  <div class="heading">Group: <%= @group[:name] %></div>
+
+  <% @group[:members].each do |member| %>
+    <a href="/control_panel/accounts/?uid=<%= member %>" class="btn"><%=  fa "caret-right", member %></a><br>
+  <% end %>
+
+</div>

@@ -64,8 +64,8 @@ class V0
             call :get, 'system/uadmin/users/groups'
           end
 
-          def show_users_group( name )
-            call :get, 'system/uadmin/users/groups/', name: name
+          def show_users_group( group_dn )
+            call :get, 'system/uadmin/users/groups/', dn: group_dn
           end
 
           ##########################################################################

@@ -76,6 +76,11 @@ class V0
           @accounts ||= Accounts.new self
         end
 
+        def groups
+          @groups ||= Groups.new self
+          # api.index_users_groups
+        end
+
         def email_addresses
           # @email_addresses ||= EmailAddresses.new self
           api.index_email_email_addresses

@@ -1,0 +1,11 @@
+<div class="control-panel">
+  <a href="/control_panel" class="btn pull-right"><%= fa 'arrow-up' %></a>
+  <div class="heading">Groups</div>
+  <div>
+    <% @groups.each do |group| %>
+        <a href="/control_panel/groups/?dn=<%= group[:dn] %>" class="btn">
+          <%=  fa "caret-right", group[:name] %>
+        </a><br>
+    <% end %>
+  </div>
+</div>

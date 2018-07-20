@@ -243,13 +243,13 @@ input[type="file"] {
 }
 
 
-.button-comment {
-  margin-top: -5px;
+.sub-comment {
+  margin: -10px 0px 0px 20px;
 }
 
 /* Hide firefox dotted outlines - not great for keyboard nav, but looks better!!!*/
-:focus {outline:none;}
-::-moz-focus-inner {border:0;}
+/*:focus {outline:none;}
+::-moz-focus-inner {border:0;}*/
 
 
 
