@@ -9,7 +9,7 @@
         class="nav-link <%= 'active' if request.path_info.split('/')[1] == 'control_panel' %>">
           <%= fa "gears", "Control panel" %></a>
       </div>
-      <% end %>
+    <% end %>
     <div class="pull-right">
       <a href="/user/password/edit"
       class="nav-link <%= 'active' if request.path_info == '/user/password/edit' %>">
