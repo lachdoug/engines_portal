@@ -27,7 +27,7 @@ class Captcha
     raise V0::NonFatalError.new( "Captcha failed", 405 ) unless
       @session[:captcha].length > 0 &&
       attempt.length > 0 &&
-      Password::Hashing.check( attempt , @session[:captcha] )
+      Password::Hashing.check( attempt.downcase, @session[:captcha] )
   end
 
   def generate_challenge
