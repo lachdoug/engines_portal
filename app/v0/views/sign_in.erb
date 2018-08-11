@@ -1,6 +1,12 @@
 <form method="post" class="form sign-in-form">
   <p><input name="sign_in[uid]" placeholder="Username"></input></p>
   <p><input name="sign_in[password]" type="password" placeholder="Password"></input></p>
+  <% unless settings.no_captcha? %>
+    <p>
+      <img class="responsive-image" src="/captcha"></img><br>
+      <input name="captcha" placeholder="Captcha" autocomplete="off"></input>
+    </p>
+  <% end %>
   <p class="center-align">
     <button type="submit" class="btn"><%= fa "check", "Sign in" %></button>
   </p>

@@ -1,6 +1,6 @@
 <div class="navbar">
   <% if current_user %>
-    <% if current_user.is_admin? %>
+    <% if current_user.is_admin? && !settings.no_admin? %>
       <div class="pull-left">
         <a href="/user/portal"
         class="nav-link <%= 'active' if request.path_info == '/user/portal' %>">

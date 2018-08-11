@@ -6,6 +6,10 @@ body {
   color: #333;
 }
 
+.responsive-image {
+  max-width: 100%
+}
+
 .portal {
   text-align: center;
 }

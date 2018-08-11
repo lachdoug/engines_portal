@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require 'sinatra/extension'
 require 'sinatra/json'
+require 'sinatra/security'
 require 'rest-client'
 require 'byebug' # if Sinatra::Base.development?
 require "sinatra/activerecord"
@@ -37,6 +38,9 @@ class V0 < Sinatra::Base
   set public_folder: 'public'
   set session_secret: ENV['ENGINES_USER_PORTAL_SESSION_SECRET'] || ENV['SECRET_KEY_BASE']
   set user_inactivity_timeout: ( ENV['ENGINES_USER_PORTAL_USER_INACTIVITY_TIMEOUT'] || 30 ).to_f * 60
+  set no_admin: ENV['ENGINES_USER_PORTAL_DISABLE_ADMIN'] == 'true'
+  set no_captcha: ENV['ENGINES_USER_PORTAL_DISABLE_CAPTCHA'] == 'true'
+  set captcha_length: ( ENV['ENGINES_USER_PORTAL_CAPTCHA_LENGTH'] || 4 ).to_i
 
   ## support _method DELETE/PUT
   use Rack::MethodOverride
@@ -127,7 +131,7 @@ class V0 < Sinatra::Base
   before do
     begin
       no_auth? || authenticate_user
-      halt 401 if is_control_panel? && !current_user.is_admin?
+      halt 401 if is_control_panel? && ( settings.no_admin? || !current_user.is_admin? )
       # byebug
     # rescue NonFatalError => e
     #   redirect '/sign_in', alert: e.message
@@ -141,6 +145,7 @@ class V0 < Sinatra::Base
   def no_auth?
     request.path_info == '/' ||
     request.path_info == '/sign_in' ||
+    request.path_info == '/captcha' ||
     request.path_info == '/user/password/success'
   end
 
